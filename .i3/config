@@ -129,7 +129,7 @@ bindsym $mod+r mode "resize"
 # Start conky to display top statusbar
 bar {
 		# Use custom conky bar for status
-        status_command /home/weebs/conky-i3bar
+        status_command ~/.i3/conky-i3bar
 		
 		# Statusbar position
         position top
