@@ -1,0 +1,150 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+
+################################# General Config ###############################
+# Set modifier key
+set $mod Mod1
+
+# Set default font
+font pango:Helvetica 11
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Allows shifting to last workspace when hitting current workspaces binding
+workspace_auto_back_and_forth yes
+
+# Tile border width
+new_window pixel 4
+
+
+################################# Key Bindings #################################
+# Start terminal
+bindsym $mod+Return exec urxvt
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Change focused window
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen global
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Switch to workspace
+bindsym $mod+1 workspace 1: 
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4:
+bindsym $mod+5 workspace 5:
+bindsym $mod+6 workspace 6:
+bindsym $mod+7 workspace 7:
+bindsym $mod+8 workspace 8:
+bindsym $mod+9 workspace 9:
+bindsym $mod+0 workspace 10:
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1: 
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4:
+bindsym $mod+Shift+5 move container to workspace 5:
+bindsym $mod+Shift+6 move container to workspace 6:
+bindsym $mod+Shift+7 move container to workspace 7:
+bindsym $mod+Shift+8 move container to workspace 8:
+bindsym $mod+Shift+9 move container to workspace 9:
+bindsym $mod+Shift+0 move container to workspace 10:
+
+# Volume and Brightness controls
+bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
+bindsym XF86MonBrightnessUp exec xbacklight +5
+bindsym XF86MonBrightnessDown exec xbacklight -5
+
+# Fix for fullscreen to fill out tile instead of whole screen
+bindsym $mod+F1 focus parent; fullscreen; focus child
+
+# Scratchpad bindings
+bindsym $mod+F2 move scratchpad
+bindsym $mod+F3 scratchpad show
+
+# Printscreen binding
+bindsym Print exec gnome-screenshot --interactive
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3
+bindsym $mod+Shift+r restart
+
+# Resize window
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+################################### statusbar ##################################
+# Start conky to display top statusbar
+bar {
+		# Use custom conky bar for status
+        status_command /home/weebs/conky-i3bar
+		
+		# Statusbar position
+        position top
+		
+		# Color scheme
+        colors {
+                background #232323
+                statusline #DCDCDC
+        }
+}
+
+
+############################### Startup programs ###############################
+# Start redshift to help prevent eye distress
+exec redshift-gtk
+
+# Start feh for running a randomly changing background
+exec_always feh --bg-scale "$(find ~/Pictures/bg/ -name '*.jpg' -o -name '*.png' | shuf -n1)"
