@@ -1,0 +1,21 @@
+#! /bin/sh
+
+# Tmp lockscreen save path
+IMAGE=/tmp/i3lockbg.png
+# Dim screen timeout
+TIMEOUT=600
+
+#Take screenshot
+import -window root $IMAGE
+
+#Apply blur
+mogrify -filter Gaussian -resize 20% -define filter:sigma=1 -resize 500% $IMAGE 
+
+#Lock screen
+i3lock -i $IMAGE
+
+#Delete the screenshot again
+rm $IMAGE
+
+#Dim screen when timeout is reached
+sleep $TIMEOUT; pgrep i3lock && xset dpms force off;
