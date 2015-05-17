@@ -17,7 +17,7 @@ prefix = '$HOME/.i3/'
 class i3_exit:
     
     # Button config
-    def disa ble_buttons(self):
+    def disable_buttons(self):
         self.cancel.set_sensitive(False)
         self.logout.set_sensitive(False)
         self.lock.set_sensitive(False)
