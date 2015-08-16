@@ -8,7 +8,7 @@
 set $mod Mod1
 
 # Set default font
-font pango:Helvetica 11
+font pango:Helvetica 11, FontAwesome 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
